@@ -160,6 +160,33 @@ plot(time,log_theta_rm);
 averages = 2;
 lines = floor(length(log_T_s)/((averages+1)*0.50)); %assuming 50% overlap (Derived 10/7/2017)
 
+%% Calculate (Speed) EA FRF (WINDOW/AVG)
+% This calculation outputs correct FRFs for both mag and pha, verified with single sine tests
+
+[EA_Est_MAG, EA_Est_PHA, EA_Est_COH, EA_Est_FREQ] = Calc_FRF_TF_EST(log_omega_rm_avg, log_omega_rm_avg_hat, lines, T_s, 'onesided');
+
+figure('Name','Speed EA MAG'); hold on; grid on; plottools
+    title('FRF Magnitude');
+    xlabel('Frequency [Hz]'); ylabel('Magnitude');
+    set(gca, 'XScale', 'log'); set(gca, 'YScale', 'linear')
+    xlim([1e-2,1e3]); ylim([0,2]);
+    plot(EA_Est_FREQ, EA_Est_MAG,'r*','MarkerSize',8);
+   
+figure('Name','Speed EA PHA'); hold on; grid on; plottools
+    title('FRF Phase');
+    xlabel('Frequency [Hz]'); ylabel('Phase');
+    set(gca, 'XScale', 'log'); set(gca, 'YScale', 'linear')
+    xlim([1e-2,1e3]); ylim([-90,90])
+    plot(EA_Est_FREQ, EA_Est_PHA,'r*','MarkerSize',8);
+
+figure('Name','Speed EA COH'); hold on; grid on; plottools
+    title('FRF Coherence');
+    xlabel('Frequency [Hz]'); ylabel('Coherence'); 
+    set(gca, 'XScale', 'log'); set(gca, 'YScale', 'linear')
+    xlim([1e-2,1e3]); ylim([0,1]);
+    plot(EA_Est_FREQ, EA_Est_COH,'r*','MarkerSize',8);
+   
+
 %% Calculate (Speed) CT FRF (WINDOW/AVG)
 % This calculation outputs correct FRFs for both mag and pha, verified with single sine tests
 
@@ -228,21 +255,21 @@ figure('Name','Speed DS MAG jw'); hold on; grid on; plottools
 
 [CT_Est_MAG, CT_Est_PHA, CT_Est_COH, CT_Est_FREQ] = Calc_FRF_TF_EST(log_i_q_e_star - j*log_i_d_e_star, log_i_q_e - j*log_i_d_e, lines, T_s, 'twosided');
 
-figure('Name','Speed CT MAG'); hold on; grid on; plottools
+figure('Name','Current CT MAG'); hold on; grid on; plottools
     title('FRF Magnitude');
     xlabel('Frequency [Hz]'); ylabel('Magnitude');
     set(gca, 'XScale', 'linear'); set(gca, 'YScale', 'linear')
     xlim([-1e3,1e3]); ylim([0,2]);
     plot(CT_Est_FREQ, CT_Est_MAG,'r.','MarkerSize',8);
    
-figure('Name','Speed CT PHA'); hold on; grid on; plottools
+figure('Name','Current CT PHA'); hold on; grid on; plottools
     title('FRF Phase');
     xlabel('Frequency [Hz]'); ylabel('Phase');
     set(gca, 'XScale', 'linear'); set(gca, 'YScale', 'linear')
     xlim([-1e3,1e3]); ylim([-90,90])
     plot(CT_Est_FREQ, CT_Est_PHA,'r.','MarkerSize',8);
 
-figure('Name','Speed CT COH'); hold on; grid on; plottools
+figure('Name','Current CT COH'); hold on; grid on; plottools
     title('FRF Coherence');
     xlabel('Frequency [Hz]'); ylabel('Coherence'); 
     set(gca, 'XScale', 'linear'); set(gca, 'YScale', 'linear')
