@@ -122,7 +122,7 @@ end
 
 %% Run Simulink Model
 endtime         = 5; %30 used for T/w DS      %[s]
-mdl             = 'MC_CVCR_rev6_sim_withc_code_S_function';
+mdl             = 'MC_CVCR_rev6_sim_withc_code_S_function_contplant_aggreg';
 set_param(mdl,'StopTime',num2str(endtime));
 sim(mdl);
 

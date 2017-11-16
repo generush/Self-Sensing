@@ -16,7 +16,7 @@ global Ld Lq  Jp bp fs Ts lambda_pm p Rs Ldq
 E = [1, 0; 0, 1];
 j = [0, -1; 1, 0];
 
-mdl = 'MC_CVCR_rev6_sim_withc_code_S_function';
+mdl = 'MC_CVCR_rev6_sim_withc_code_S_function_contplant_aggreg';
 
 open_system(mdl);
 
